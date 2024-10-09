@@ -5,7 +5,7 @@ git config --global user.name "你的名字"
 git config --global user.email "你的電子郵件"
 ```
 2. 創建或進入專案資料夾
-打開 CMD，然後導航到你要上傳的專案資料夾。如果需要創建新資料夾，使用以下命令：
+打開 CMD，然後切換路徑到你要上傳的專案資料夾。如果需要創建新資料夾，使用以下命令：
 ```
 mkdir my-project
 cd my-project
@@ -45,7 +45,7 @@ git push -u origin main
 如果這是你第一次推送到這個遠端倉庫，可能會要求你輸入 GitHub 的使用者名稱和密碼。
 確保在上傳之前，所有檔案都已經正確新增和提交。
 
-補充
+### 補充
 1. 查看當前分支
 查看當前所在的分支：
 
@@ -75,3 +75,55 @@ git checkout -b new-branch-name
 注意事項
 如果當前分支有未提交的更改，Git 會阻止你切換到其他分支，除非這些更改被提交或儲存（使用 git stash）。
 確保在切換分支之前，已經將當前的變更提交，以避免潛在的衝突。
+
+### 完全退回到某个提交:
+1.查看提交歷史
+```
+git log
+```
+
+> commit 43603dc9e52b168d8df8e574729af58e4f28dfc0 (master)
+> Author: Mmazhili <jg1211jg@gmail.com>
+> Date:   Wed Oct 9 19:08:19 2024 +0800
+
+> 新增 test.txt
+
+> commit acb4cecf8090ab65549e7708ff757e9d4095bca6
+> Author: Mmazhilin <45139687+Mmazhilin@users.noreply.github.com>
+> Date:   Wed Oct 9 19:01:51 2024 +0800
+
+> Update README.md
+
+> commit 095beb2cc7845508536effaee62118c2430bf08c
+> Author: Mmazhilin <45139687+Mmazhilin@users.noreply.github.com>
+> Date:   Wed Oct 9 18:57:23 2024 +0800
+
+> Create README.md
+
+> commit 7093a2514c54dfc3b4bd66ed1904d40506396bb6
+> Author: Mmazhilin <45139687+Mmazhilin@users.noreply.github.com>
+> Date:   Wed Oct 9 18:28:08 2024 +0800
+
+> Initial commit
+
+
+2.使用 git reset 撤销提交
+保留更改在暫存區
+```
+git reset --soft <commit-hash>
+```
+保留更改在工作目錄，但不在暫存區
+```
+git reset --mixed <commit-hash>
+```
+删除所有更改
+```
+git reset --hard <commit-hash>
+```
+注意：使用 --hard 會永久刪除所有未提交的更改，請警慎使用。
+`commit-hash 提交號碼`
+3.上傳更改到遠程倉庫
+```
+git push origin <branch-name> --force
+```
+`branch-name 分支`
